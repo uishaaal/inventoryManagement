@@ -7,11 +7,11 @@ public class Payment {
     public Payment(PaymentStrategyEnum strategy)
     {
         if(strategy==PaymentStrategyEnum.CREDIT_CARD){
-            this.paymentStrategy=new UpiPayment();
+            this.paymentStrategy=new CreditCardPayment();
         }
         else if(strategy==PaymentStrategyEnum.UPI_PAYMENT)
         {
-            this.paymentStrategy=new CreditCardPayment();
+            this.paymentStrategy=new UpiPayment();
         }
     }
     public void makePayment(Order order)

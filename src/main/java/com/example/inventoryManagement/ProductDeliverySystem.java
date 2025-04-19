@@ -1,15 +1,23 @@
 package com.example.inventoryManagement;
 
 
+import java.util.List;
+
 public class ProductDeliverySystem {
     WarehouseController warehouseController;
     UserController userController;
 
     OrderController orderController;
 
+    public ProductDeliverySystem(WareHouseStrategyEnum strategyEnum, List<Warehouse> warehouseList,List<User> userList) {
+        this.warehouseController = new WarehouseController(strategyEnum,warehouseList);
+        this.userController=new UserController(userList);
+        this.orderController=new OrderController();
+    }
+
     public Warehouse findWarehouse(User user)
     {
-        return warehouseController.findWarehouse(user);
+        return this.warehouseController.findWarehouse(user);
     }
     public void addItemToTheCart(int userId,int productId,int count) throws Exception
     {
@@ -33,9 +41,10 @@ public class ProductDeliverySystem {
             throw new Exception("User not found");
         }
     }
-    public void createOrder(User user,Warehouse warehouse)
+    public Order createOrder(User user,Warehouse warehouse)
     {
         Order order=orderController.createOrder(user,warehouse);
+        return order;
     }
     public void createInvoice(Order order)
     {
@@ -48,5 +57,20 @@ public class ProductDeliverySystem {
     {
         Payment payment=new Payment(strategy);
         payment.makePayment(order);
+        if(order.getOrderStatus()==OrderStatus.PAID)
+        {
+            postPayment(order);
+        }
+    }
+    public void postPayment(Order order)
+    {
+        User user=userController.getUser(order.userId);
+        addOrderToUserAndController(user,order);
+        user.emptyCart();
+    }
+    public void addOrderToUserAndController(User user,Order order)
+    {
+        user.addOrder(order.getId());
+        orderController.addOrder(order);
     }
 }

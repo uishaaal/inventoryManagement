@@ -1,11 +1,14 @@
 package com.example.inventoryManagement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     int id;
     String name;
     Address address;
     Cart cart;
-    //List<Order> orderList;
+    List<Integer> orderList;
 
 
     public User(int id, String name, Address address) {
@@ -13,6 +16,7 @@ public class User {
         this.name = name;
         this.address = address;
         this.cart=new Cart();
+        this.orderList=new ArrayList<>();
 
     }
 
@@ -39,5 +43,12 @@ public class User {
     public void removeItemFromCart(int id)
     {
         this.cart.removeItemFromCart(id);
+    }
+    public void addOrder(int orderId)
+    {
+        this.orderList.add(orderId);
+    }
+    public void emptyCart(){
+        this.cart.clearCart();
     }
 }

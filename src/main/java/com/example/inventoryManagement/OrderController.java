@@ -1,13 +1,14 @@
 package com.example.inventoryManagement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderController {
-    List<Order> orderList;
-    public void OrderController()
+    HashMap<Integer,Order> orderList;
+    public OrderController()
     {
-        this.orderList=new ArrayList<>();
+        this.orderList=new HashMap<>();
     }
     public Order createOrder(User user,Warehouse warehouse){
 
@@ -19,5 +20,9 @@ public class OrderController {
         order.setWarehouse(warehouse);
         return order;
 
+    }
+    public void addOrder(Order order)
+    {
+        this.orderList.put(order.getId(), order);
     }
 }

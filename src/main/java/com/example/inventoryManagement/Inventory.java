@@ -11,15 +11,15 @@ public class Inventory {
     }
     public void addProductCategory(ProductCategory productCategory)
     {
-        ProductCategory searchproductCategory =productCategoryList.stream().filter(productCategory1 -> productCategory1.id==productCategory.getId()).findFirst().get();
-        if(searchproductCategory!=null)
+        ProductCategory searchproductCategory =productCategoryList.stream().filter(productCategory1 -> productCategory1.getId()==productCategory.getId()).findFirst().orElse(null);
+        if(searchproductCategory==null)
         {
             this.productCategoryList.add(productCategory);
         }
     }
     public void removeProductCategory(ProductCategory productCategory)
     {
-        ProductCategory searchproductCategory =productCategoryList.stream().filter(productCategory1 -> productCategory1.id==productCategory.getId()).findFirst().get();
+        ProductCategory searchproductCategory =productCategoryList.stream().filter(productCategory1 -> productCategory1.id==productCategory.getId()).findFirst().orElse(null);
         if(searchproductCategory!=null)
         {
             this.productCategoryList.remove(productCategory);

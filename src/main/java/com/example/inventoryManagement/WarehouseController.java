@@ -7,13 +7,17 @@ public class WarehouseController {
     List<Warehouse> warehouseList;
     WarehouseStrategy warehouseStrategy;
 
-    WarehouseController(WarehouseStrategy warehouseStrategy)
+    public WarehouseController(WareHouseStrategyEnum strategy,List<Warehouse> warehouseList)
     {
         this.warehouseList=new ArrayList<>();
-        this.warehouseStrategy=warehouseStrategy;
+        if(strategy==WareHouseStrategyEnum.NEAREST)
+            this.warehouseStrategy=new NearestWarehouseStrategy();
+        else if(strategy==WareHouseStrategyEnum.CHEAPEST)
+            this.warehouseStrategy=new CheapestWarehouseStrategy();
+        this.warehouseList=warehouseList;
     }
     public Warehouse findWarehouse(User user)
     {
-        return warehouseStrategy.findWarehouse(warehouseList,user);
+        return this.warehouseStrategy.findWarehouse(warehouseList,user);
     }
 }

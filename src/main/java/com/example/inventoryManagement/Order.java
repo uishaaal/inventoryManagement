@@ -19,8 +19,16 @@ public class Order {
         this.prodVsCount=new HashMap<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setUserId(int id) {
         this.userId = id;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
     public void setUserAddress(Address userAddress) {
@@ -38,4 +46,5 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
 }

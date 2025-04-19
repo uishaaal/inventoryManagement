@@ -34,4 +34,7 @@ public class Cart {
             this.productVsCountMap.remove(id);
         }
     }
+    public void clearCart(){
+        this.productVsCountMap.clear();
+    }
 }

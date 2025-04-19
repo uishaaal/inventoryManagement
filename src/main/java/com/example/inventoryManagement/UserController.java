@@ -5,8 +5,8 @@ import java.util.List;
 
 public class UserController {
     List<User> userList;
-    UserController(){
-        this.userList=new ArrayList<>();
+    UserController(List<User> userList){
+        this.userList=userList;
     }
     public User getUser(int userId)
     {
